@@ -1,0 +1,150 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIXIT | Customer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#f5f8fd;color:#101828}
+button,input,select{font-family:inherit}
+.header{height:72px;background:#fff;border-bottom:1px solid #e7edf5;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10}
+.logo{font-size:25px;font-weight:900;color:#0866ff}.logo span{color:#111827}
+.user{display:flex;align-items:center;gap:12px}.avatar{width:40px;height:40px;border-radius:50%;background:#eaf2ff;display:grid;place-items:center}
+.container{width:min(1150px,92%);margin:auto;padding:35px 0}
+.welcome{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.welcome h1{font-size:30px;letter-spacing:-1px}.welcome p{color:#667085;margin-top:7px;font-size:14px}
+.emergency{background:#fff0f0;border:1px solid #ffd2d2;color:#d92d20;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}
+.search{background:white;border:1px solid #e4eaf2;border-radius:16px;padding:14px 18px;width:100%;font-size:15px;outline:none;margin-bottom:30px}
+.title{font-size:20px;margin-bottom:17px}
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:38px}
+.service{background:white;border:1px solid #e6ebf2;border-radius:17px;padding:22px;cursor:pointer;transition:.25s}
+.service:hover{transform:translateY(-5px);border-color:#9fc3ff;box-shadow:0 15px 35px #0866ff12}
+.icon{font-size:30px;margin-bottom:12px}.service strong{font-size:14px}.service small{display:block;color:#98a2b3;margin-top:5px}
+.card{background:white;border:1px solid #e4eaf2;border-radius:20px;padding:22px;margin-bottom:15px}
+.booking{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.booking h3{font-size:15px;margin-bottom:7px}.booking p{font-size:12px;color:#667085}
+.status{padding:7px 11px;border-radius:20px;background:#ecfdf3;color:#027a48;font-size:11px;font-weight:800}
+.btn{border:0;background:#0866ff;color:#fff;padding:12px 18px;border-radius:11px;font-weight:800;cursor:pointer}
+@media(max-width:700px){.services{grid-template-columns:repeat(2,1fr)}.welcome{align-items:flex-start;gap:15px}.emergency{font-size:11px}.booking{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">FIXIT<span>.</span></a>
+  <div class="user"><span>Customer</span><div class="avatar">🏠</div></div>
+</header>
+
+<main class="container">
+
+  <div class="welcome">
+    <div>
+      <h1>Good evening 👋</h1>
+      <p>What do you need help with today?</p>
+    </div>
+    <button class="emergency" onclick="emergency()">🚨 Emergency</button>
+  </div>
+
+  <input class="search" id="search" placeholder="🔍 Search electrician, plumber, AC service..." onkeyup="searchServices()">
+
+  <h2 class="title">Popular Services</h2>
+
+  <div class="services" id="services">
+
+    <div class="service" onclick="book('Electrician')">
+      <div class="icon">⚡</div><strong>Electrician</strong>
+      <small>Electrical work</small>
+    </div>
+
+    <div class="service" onclick="book('Plumber')">
+      <div class="icon">🚰</div><strong>Plumber</strong>
+      <small>Water & pipes</small>
+    </div>
+
+    <div class="service" onclick="book('AC Technician')">
+      <div class="icon">❄️</div><strong>AC Technician</strong>
+      <small>AC service</small>
+    </div>
+
+    <div class="service" onclick="book('Refrigerator')">
+      <div class="icon">🧊</div><strong>Refrigerator</strong>
+      <small>Appliance repair</small>
+    </div>
+
+    <div class="service" onclick="book('Washing Machine')">
+      <div class="icon">🧺</div><strong>Washing Machine</strong>
+      <small>Repair</small>
+    </div>
+
+    <div class="service" onclick="book('Carpenter')">
+      <div class="icon">🪚</div><strong>Carpenter</strong>
+      <small>Wood work</small>
+    </div>
+
+    <div class="service" onclick="book('Painter')">
+      <div class="icon">🎨</div><strong>Painter</strong>
+      <small>Painting</small>
+    </div>
+
+    <div class="service" onclick="book('Other Service')">
+      <div class="icon">🔧</div><strong>Other</strong>
+      <small>Coming soon</small>
+    </div>
+
+  </div>
+
+  <h2 class="title">Your Bookings</h2>
+
+  <div id="bookings"></div>
+
+</main>
+
+<script>
+function book(service){
+  localStorage.setItem("selectedService",service);
+  location.href="booking.html";
+}
+
+function emergency(){
+  localStorage.setItem("selectedService","Emergency Service");
+  location.href="booking.html";
+}
+
+function searchServices(){
+  let value=document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".service").forEach(x=>{
+    x.style.display=x.innerText.toLowerCase().includes(value)?"block":"none";
+  });
+}
+
+function loadBookings(){
+  let bookings=JSON.parse(localStorage.getItem("fixitBookings")||"[]");
+  let box=document.getElementById("bookings");
+
+  if(!bookings.length){
+    box.innerHTML='<div class="card"><p style="color:#98a2b3">No bookings yet. Choose a service above to get started.</p></div>';
+    return;
+  }
+
+  box.innerHTML=bookings.slice().reverse().map(b=>`
+    <div class="card booking">
+      <div>
+        <h3>${b.service}</h3>
+        <p>${b.date || "Today"} • Booking code: <b>${b.code}</b></p>
+      </div>
+      <span class="status">${b.status||"Requested"}</span>
+    </div>
+  `).join("");
+}
+
+loadBookings();
+</script>
+
+</body>
+</html>
+```

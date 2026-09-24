@@ -1,0 +1,54 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIXIT | Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#f6f9fd;color:#101828}
+.header{height:72px;background:white;border-bottom:1px solid #e5ebf2;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+.logo{font-size:25px;font-weight:900;color:#0866ff}.logo span{color:#111827}
+.nav a{margin-left:22px;font-size:13px;font-weight:700;color:#667085}
+.container{width:min(1100px,92%);margin:auto;padding:65px 0}
+.hero{text-align:center;margin-bottom:45px}.hero h1{font-size:43px;letter-spacing:-2px}.hero p{color:#667085;max-width:650px;margin:12px auto;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{background:white;border:1px solid #e4eaf2;border-radius:20px;padding:25px;transition:.25s}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 45px #0866ff10}
+.icon{font-size:35px;margin-bottom:15px}.card h3{font-size:16px}.card p{font-size:12px;color:#667085;margin-top:8px;line-height:1.6}
+@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:35px}}
+</style>
+</head>
+<body>
+<header class="header">
+<a href="index.html" class="logo">FIXIT<span>.</span></a>
+<nav class="nav">
+<a href="index.html">Home</a>
+<a href="client.html">Customer</a>
+<a href="worker.html">Worker</a>
+</nav>
+</header>
+
+<main class="container">
+<section class="hero">
+<h1>Everything your home needs.</h1>
+<p>Find local professionals for repairs, maintenance and everyday home services.</p>
+</section>
+
+<div class="grid">
+<div class="card"><div class="icon">⚡</div><h3>Electrician</h3><p>Wiring, switches, lights and electrical repairs.</p></div>
+<div class="card"><div class="icon">🚰</div><h3>Plumber</h3><p>Leaks, pipes, taps and water-related repairs.</p></div>
+<div class="card"><div class="icon">❄️</div><h3>AC Technician</h3><p>AC installation, servicing and maintenance.</p></div>
+<div class="card"><div class="icon">🧊</div><h3>Refrigerator</h3><p>Refrigerator diagnosis and repair.</p></div>
+<div class="card"><div class="icon">🧺</div><h3>Washing Machine</h3><p>Washing machine repair and maintenance.</p></div>
+<div class="card"><div class="icon">🪚</div><h3>Carpenter</h3><p>Furniture, doors, fittings and woodwork.</p></div>
+<div class="card"><div class="icon">🎨</div><h3>Painter</h3><p>Interior and exterior painting.</p></div>
+<div class="card"><div class="icon">🧹</div><h3>Cleaning</h3><p>Home cleaning services.</p></div>
+<div class="card"><div class="icon">🔧</div><h3>More Coming Soon</h3><p>More local services will be added.</p></div>
+</div>
+</main>
+</body>
+</html>
+```

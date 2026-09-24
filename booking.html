@@ -1,0 +1,143 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIXIT | Book Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#f5f8fd;color:#101828}
+.header{height:72px;background:white;border-bottom:1px solid #e5ebf2;display:flex;align-items:center;padding:0 6%}
+.logo{font-size:25px;font-weight:900;color:#0866ff}.logo span{color:#111827}
+.container{width:min(700px,92%);margin:auto;padding:45px 0}
+.card{background:white;border:1px solid #e4eaf2;border-radius:25px;padding:30px;box-shadow:0 20px 60px #1018280b}
+.back{color:#0866ff;font-size:13px;font-weight:800;margin-bottom:25px;display:block}
+h1{font-size:29px;margin-bottom:8px} .sub{color:#667085;font-size:13px;margin-bottom:25px}
+label{display:block;font-size:12px;font-weight:800;margin:16px 0 7px}
+input,textarea,select{width:100%;padding:14px;border:1px solid #dce3ec;border-radius:11px;outline:none}
+textarea{min-height:100px;resize:vertical}
+.btn{width:100%;margin-top:22px;padding:15px;background:#0866ff;color:white;border:0;border-radius:11px;font-weight:800;cursor:pointer}
+.code{display:none;text-align:center}.code h2{font-size:18px;margin-bottom:10px}
+.code-number{font-size:42px;letter-spacing:12px;color:#0866ff;font-weight:900;margin:20px 0}
+.warning{background:#fff8e8;color:#b54708;padding:14px;border-radius:12px;font-size:12px;line-height:1.6}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<a href="index.html" class="logo">FIXIT<span>.</span></a>
+</header>
+
+<main class="container">
+
+<div class="card" id="form">
+
+<a href="client.html" class="back">← Back to services</a>
+
+<h1>Book a FIXIT professional</h1>
+
+<p class="sub">
+Service selected: <b id="service"></b>
+</p>
+
+<label>Your location</label>
+<input id="location" placeholder="Enter your area">
+
+<label>Problem description</label>
+<textarea id="problem" placeholder="Tell the worker what needs to be fixed..."></textarea>
+
+<label>Preferred time</label>
+<select id="time">
+<option>As soon as possible</option>
+<option>Today — Morning</option>
+<option>Today — Afternoon</option>
+<option>Today — Evening</option>
+<option>Tomorrow</option>
+</select>
+
+<button class="btn" onclick="createBooking()">
+FIND AVAILABLE WORKERS
+</button>
+
+</div>
+
+
+<div class="card code" id="success">
+
+<h2>🎉 Booking Request Created</h2>
+
+<p class="sub">
+Your one-time verification code is:
+</p>
+
+<div class="code-number" id="code"></div>
+
+<div class="warning">
+🔐 <b>Important:</b> Give this code to the FIXIT worker
+only when the worker arrives at your location.
+A new code is generated for every booking.
+</div>
+
+<br>
+
+<p style="font-size:12px;color:#667085">
+Worker matching and booking confirmation will appear here
+when the FIXIT backend is connected.
+</p>
+
+<br>
+
+<a href="client.html" class="btn" style="display:block;text-align:center">
+GO TO MY BOOKINGS
+</a>
+
+</div>
+
+</main>
+
+<script>
+
+let service=localStorage.getItem("selectedService")||"Home Service";
+document.getElementById("service").innerText=service;
+
+function generateCode(){
+
+ return Math.floor(1000+Math.random()*9000);
+
+}
+
+function createBooking(){
+
+ let code=generateCode();
+
+ let booking={
+   service:service,
+   location:document.getElementById("location").value,
+   problem:document.getElementById("problem").value,
+   time:document.getElementById("time").value,
+   code:code,
+   status:"Requested",
+   date:new Date().toLocaleDateString()
+ };
+
+ let bookings=JSON.parse(localStorage.getItem("fixitBookings")||"[]");
+
+ bookings.push(booking);
+
+ localStorage.setItem("fixitBookings",JSON.stringify(bookings));
+
+ document.getElementById("form").style.display="none";
+ document.getElementById("success").style.display="block";
+ document.getElementById("code").innerText=code;
+
+}
+
+</script>
+
+</body>
+</html>
+```

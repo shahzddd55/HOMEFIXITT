@@ -1,0 +1,155 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIXIT | Worker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#f5f8fd;color:#101828}
+.header{height:72px;background:white;border-bottom:1px solid #e7edf5;display:flex;justify-content:space-between;align-items:center;padding:0 6%;position:sticky;top:0}
+.logo{font-size:25px;font-weight:900;color:#0866ff}.logo span{color:#111827}
+.container{width:min(1150px,92%);margin:auto;padding:35px 0}
+.profile{background:linear-gradient(135deg,#0866ff,#0a7cff);color:white;border-radius:24px;padding:30px;display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.profile-left{display:flex;gap:18px;align-items:center}.avatar{width:70px;height:70px;border-radius:20px;background:#fff3;display:grid;place-items:center;font-size:34px}
+.profile h1{font-size:24px}.id{font-size:12px;opacity:.75;margin-top:6px}
+.toggle{background:white;color:#0866ff;border:0;border-radius:30px;padding:11px 17px;font-weight:800;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+.stat{background:white;border:1px solid #e4eaf2;border-radius:17px;padding:20px}.stat small{color:#98a2b3}.stat strong{display:block;font-size:25px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:20px}
+.card{background:white;border:1px solid #e4eaf2;border-radius:20px;padding:23px;margin-bottom:15px}
+.title{font-size:19px;margin-bottom:18px}
+.job{border:1px solid #edf1f6;border-radius:15px;padding:17px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.job h3{font-size:14px;margin-bottom:5px}.job p{font-size:11px;color:#667085}
+.accept{border:0;background:#0866ff;color:white;border-radius:9px;padding:10px 14px;font-size:11px;font-weight:800;cursor:pointer}
+.review{font-size:13px;color:#667085;padding:10px 0;border-bottom:1px solid #edf1f6}
+@media(max-width:750px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.profile{align-items:flex-start;gap:20px}.profile{flex-direction:column}}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">FIXIT<span>.</span></a>
+  <span>👨‍🔧 Worker Portal</span>
+</header>
+
+<main class="container">
+
+  <section class="profile">
+    <div class="profile-left">
+      <div class="avatar">👨‍🔧</div>
+      <div>
+        <h1>Welcome, FIXIT Worker</h1>
+        <div class="id">Worker ID: <b>FIX3321</b> • Verified ✓</div>
+      </div>
+    </div>
+
+    <button class="toggle" onclick="toggleOnline()" id="online">
+      🟢 ONLINE
+    </button>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><small>Today's Jobs</small><strong>2</strong></div>
+    <div class="stat"><small>Completed</small><strong>37</strong></div>
+    <div class="stat"><small>Rating</small><strong>4.8 ⭐</strong></div>
+    <div class="stat"><small>This Month</small><strong>₹8,450</strong></div>
+  </div>
+
+  <div class="grid">
+
+    <section>
+      <div class="card">
+        <h2 class="title">New Service Requests</h2>
+
+        <div class="job">
+          <div>
+            <h3>⚡ Electrical Repair</h3>
+            <p>2.4 km • Kaipamangalam</p>
+          </div>
+          <button class="accept" onclick="acceptJob('Electrical Repair')">ACCEPT</button>
+        </div>
+
+        <div class="job">
+          <div>
+            <h3>❄️ AC Service</h3>
+            <p>3.1 km • Nearby</p>
+          </div>
+          <button class="accept" onclick="acceptJob('AC Service')">ACCEPT</button>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <h2 class="title">Today's Work</h2>
+        <div id="jobs">
+          <p style="color:#98a2b3;font-size:13px">No accepted jobs yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <aside>
+
+      <div class="card">
+        <h2 class="title">Your Profile</h2>
+        <p style="font-size:13px;color:#667085;line-height:1.8">
+          Skills: Electrician<br>
+          Experience: 5 Years<br>
+          Service Area: Ernakulam<br>
+          Status: <b style="color:#12b76a">Approved</b>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 class="title">Customer Reviews</h2>
+        <div class="review">⭐⭐⭐⭐⭐ Excellent work!</div>
+        <div class="review">⭐⭐⭐⭐⭐ Arrived quickly.</div>
+        <div class="review">⭐⭐⭐⭐ Good service.</div>
+      </div>
+
+    </aside>
+
+  </div>
+
+</main>
+
+<script>
+function toggleOnline(){
+ const b=document.getElementById("online");
+ if(b.innerText.includes("ONLINE")){
+   b.innerText="⚫ OFFLINE";
+   b.style.color="#667085";
+ }else{
+   b.innerText="🟢 ONLINE";
+   b.style.color="#0866ff";
+ }
+}
+
+function acceptJob(service){
+ let jobs=JSON.parse(localStorage.getItem("workerJobs")||"[]");
+ jobs.push({service:service,time:new Date().toLocaleString()});
+ localStorage.setItem("workerJobs",JSON.stringify(jobs));
+ loadJobs();
+ alert("Job accepted successfully.");
+}
+
+function loadJobs(){
+ let jobs=JSON.parse(localStorage.getItem("workerJobs")||"[]");
+ document.getElementById("jobs").innerHTML=jobs.length?
+ jobs.slice().reverse().map(j=>`
+ <div class="job">
+ <div><h3>${j.service}</h3><p>${j.time}</p></div>
+ <b style="color:#12b76a;font-size:11px">ACCEPTED</b>
+ </div>`).join("")
+ :'<p style="color:#98a2b3;font-size:13px">No accepted jobs yet.</p>';
+}
+loadJobs();
+</script>
+
+</body>
+</html>
+```

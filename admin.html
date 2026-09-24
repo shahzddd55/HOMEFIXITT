@@ -1,0 +1,241 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIXIT | Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#f4f7fb;color:#101828}
+.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 20% 20%,#dceaff,transparent 35%),linear-gradient(135deg,#f8fbff,#eaf3ff)}
+.login-card{background:white;width:min(420px,92%);padding:40px;border-radius:25px;box-shadow:0 30px 80px #10182818;text-align:center}
+.shield{width:70px;height:70px;border-radius:20px;background:#eaf2ff;display:grid;place-items:center;font-size:32px;margin:0 auto 20px}
+.login-card h1{font-size:27px;margin-bottom:8px}.login-card p{color:#667085;font-size:13px;margin-bottom:25px}
+input{width:100%;padding:14px;border:1px solid #dce3ec;border-radius:11px;outline:none;margin-bottom:12px}
+button{border:0;cursor:pointer;font-weight:800}
+.login-btn{width:100%;padding:14px;background:#0866ff;color:white;border-radius:11px}
+#error{color:#d92d20;font-size:12px;margin-top:12px}
+.dashboard{display:none}
+.header{height:72px;background:#07111f;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.logo{font-size:24px;font-weight:900;color:#6da5ff}.logo span{color:white}
+.logout{background:#ffffff14;color:white;border:1px solid #ffffff20;padding:9px 14px;border-radius:9px}
+.container{width:min(1250px,92%);margin:auto;padding:30px 0}
+.heading{margin-bottom:25px}.heading h1{font-size:29px}.heading p{color:#667085;margin-top:6px;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:25px}
+.stat{background:white;border:1px solid #e5ebf2;border-radius:16px;padding:19px}.stat small{color:#98a2b3}.stat strong{display:block;font-size:25px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:white;border:1px solid #e5ebf2;border-radius:18px;padding:22px;margin-bottom:18px}
+.card h2{font-size:17px;margin-bottom:17px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #edf1f6;gap:15px}
+.row:last-child{border-bottom:0}.row p{font-size:12px}.row small{display:block;color:#98a2b3;margin-top:4px}
+.approve{background:#12b76a;color:white;padding:8px 11px;border-radius:8px;font-size:10px}
+.reject{background:#fee4e2;color:#b42318;padding:8px 11px;border-radius:8px;font-size:10px}
+.search{margin-bottom:15px}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<div class="login" id="login">
+
+  <div class="login-card">
+
+    <div class="shield">🔐</div>
+
+    <h1>FIXIT Admin</h1>
+
+    <p>Private administration panel</p>
+
+    <input type="password" id="password" placeholder="Enter admin password">
+
+    <button class="login-btn" onclick="login()">
+      LOGIN TO DASHBOARD
+    </button>
+
+    <div id="error"></div>
+
+  </div>
+
+</div>
+
+
+<div class="dashboard" id="dashboard">
+
+<header class="header">
+  <div class="logo">FIXIT<span> ADMIN</span></div>
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<main class="container">
+
+<div class="heading">
+  <h1>Command Center</h1>
+  <p>Manage your FIXIT platform, workers, customers and bookings.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><small>Customers</small><strong id="customers">128</strong></div>
+  <div class="stat"><small>Workers</small><strong id="workers">43</strong></div>
+  <div class="stat"><small>Bookings</small><strong id="bookings">287</strong></div>
+  <div class="stat"><small>Pending</small><strong>12</strong></div>
+  <div class="stat"><small>Revenue</small><strong>₹3,010</strong></div>
+</div>
+
+<div class="grid">
+
+<section>
+
+<div class="card">
+
+<h2>👨‍🔧 Worker Applications</h2>
+
+<div class="row">
+<div><p><b>Rahul — Electrician</b></p><small>5 years • Ernakulam</small></div>
+<div>
+<button class="approve" onclick="approve(this)">APPROVE</button>
+<button class="reject" onclick="reject(this)">REJECT</button>
+</div>
+</div>
+
+<div class="row">
+<div><p><b>Sameer — Plumber</b></p><small>3 years • Kochi</small></div>
+<div>
+<button class="approve" onclick="approve(this)">APPROVE</button>
+<button class="reject" onclick="reject(this)">REJECT</button>
+</div>
+</div>
+
+<div class="row">
+<div><p><b>Arun — AC Technician</b></p><small>7 years • Aluva</small></div>
+<div>
+<button class="approve" onclick="approve(this)">APPROVE</button>
+<button class="reject" onclick="reject(this)">REJECT</button>
+</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📅 Recent Bookings</h2>
+
+<div class="row">
+<div><p><b>Electrician</b></p><small>Customer #1024 • Today</small></div>
+<span>✅ Completed</span>
+</div>
+
+<div class="row">
+<div><p><b>AC Service</b></p><small>Customer #1021 • Today</small></div>
+<span>🟡 Active</span>
+</div>
+
+<div class="row">
+<div><p><b>Plumber</b></p><small>Customer #1019 • Yesterday</small></div>
+<span>✅ Completed</span>
+</div>
+
+</div>
+
+</section>
+
+
+<aside>
+
+<div class="card">
+
+<h2>🔎 Search Records</h2>
+
+<input class="search" placeholder="Search customer, worker or booking...">
+
+<div class="row">
+<div><p><b>FIX3321</b></p><small>Electrician • Verified</small></div>
+<span>🟢</span>
+</div>
+
+<div class="row">
+<div><p><b>FIX3340</b></p><small>Plumber • Verified</small></div>
+<span>🟢</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📊 Platform Status</h2>
+
+<div class="row"><p>Workers online</p><b>18</b></div>
+<div class="row"><p>Emergency requests</p><b>3</b></div>
+<div class="row"><p>Services available</p><b>7</b></div>
+<div class="row"><p>Average rating</p><b>4.7 ⭐</b></div>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const ADMIN_PASSWORD="shahzad2005";
+
+function login(){
+
+ const value=document.getElementById("password").value;
+
+ if(value===ADMIN_PASSWORD){
+
+   sessionStorage.setItem("fixitAdmin","true");
+
+   document.getElementById("login").style.display="none";
+   document.getElementById("dashboard").style.display="block";
+
+ }else{
+
+   document.getElementById("error").innerText="Incorrect password.";
+
+ }
+
+}
+
+function logout(){
+
+ sessionStorage.removeItem("fixitAdmin");
+ location.reload();
+
+}
+
+function approve(btn){
+
+ btn.parentElement.parentElement.innerHTML=
+ '<span style="color:#027a48;font-weight:800;font-size:11px">✓ APPROVED</span>';
+
+}
+
+function reject(btn){
+
+ btn.parentElement.parentElement.innerHTML=
+ '<span style="color:#b42318;font-weight:800;font-size:11px">✕ REJECTED</span>';
+
+}
+
+if(sessionStorage.getItem("fixitAdmin")==="true"){
+
+ document.getElementById("login").style.display="none";
+ document.getElementById("dashboard").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
+```
