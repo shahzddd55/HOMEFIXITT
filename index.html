@@ -1,0 +1,1974 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FIXIT — Find Trusted Home Service Workers</title>
+
+  <meta name="description"
+        content="FIXIT connects you with trusted electricians, plumbers, AC technicians, refrigerator technicians and other home service professionals near you.">
+
+  <meta name="theme-color" content="#0866ff">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+  <style>
+
+    /* =========================================================
+       FIXIT GLOBAL
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #f7faff;
+      color: #101828;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(15,23,42,0.06);
+    }
+
+    .header-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #0866ff;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+
+      display: grid;
+      place-items: center;
+
+      background: linear-gradient(135deg,#0866ff,#00a8ff);
+      color: white;
+
+      box-shadow: 0 8px 25px rgba(8,102,255,.25);
+    }
+
+    .logo span {
+      color: #111827;
+    }
+
+    .site-nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .site-nav a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475467;
+      transition: .25s;
+    }
+
+    .site-nav a:hover {
+      color: #0866ff;
+    }
+
+    .header-login {
+      padding: 11px 19px;
+      border-radius: 10px;
+      background: #0866ff;
+      color: white !important;
+      box-shadow: 0 8px 20px rgba(8,102,255,.2);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 760px;
+      padding-top: 76px;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 80% 25%, rgba(0,168,255,.16), transparent 30%),
+        radial-gradient(circle at 15% 70%, rgba(8,102,255,.10), transparent 30%),
+        linear-gradient(135deg,#f8fbff,#eef6ff);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      right: -180px;
+      top: 90px;
+
+      border-radius: 50%;
+      background: rgba(8,102,255,.05);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .hero-inner {
+      min-height: 680px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 13px;
+      border-radius: 100px;
+
+      background: #e7f0ff;
+      color: #0866ff;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #18c964;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(24,201,100,.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(44px,5vw,70px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: #0866ff;
+    }
+
+    .hero-copy > p {
+      color: #667085;
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 610px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 15px 23px;
+      border-radius: 13px;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      transition: .25s;
+    }
+
+    .btn-primary {
+      color: white;
+      background: #0866ff;
+      box-shadow: 0 12px 30px rgba(8,102,255,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(8,102,255,.32);
+    }
+
+    .btn-secondary {
+      color: #344054;
+      background: white;
+      border: 1px solid #dbe4f0;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: #0866ff;
+      color: #0866ff;
+    }
+
+    /* =========================================================
+       HERO SERVICE CARD
+    ========================================================= */
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-card {
+      width: 390px;
+      max-width: 100%;
+      background: white;
+      border-radius: 26px;
+      padding: 25px;
+
+      box-shadow:
+        0 30px 80px rgba(16,24,40,.13),
+        0 5px 20px rgba(8,102,255,.08);
+
+      animation: cardFloat 5s ease-in-out infinite;
+      position: relative;
+      z-index: 3;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .card-header strong {
+      font-size: 18px;
+    }
+
+    .online {
+      color: #12b76a;
+      background: #ecfdf3;
+      padding: 6px 10px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-worker {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      padding: 13px;
+      border: 1px solid #edf1f6;
+      border-radius: 15px;
+
+      transition: .25s;
+    }
+
+    .mini-worker:hover {
+      transform: translateX(5px);
+      border-color: #b8d3ff;
+      background: #f8fbff;
+    }
+
+    .worker-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+
+      display: grid;
+      place-items: center;
+
+      background: #eaf2ff;
+      font-size: 22px;
+    }
+
+    .worker-info {
+      flex: 1;
+    }
+
+    .worker-info strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .worker-info small {
+      color: #98a2b3;
+      font-size: 11px;
+    }
+
+    .stars {
+      color: #f79009;
+      font-size: 11px;
+    }
+
+    .book-mini {
+      color: #0866ff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: white;
+      border-radius: 16px;
+      padding: 13px 17px;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      box-shadow: 0 18px 50px rgba(16,24,40,.13);
+      z-index: 4;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-one {
+      top: 50px;
+      right: -20px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .badge-two {
+      bottom: 55px;
+      left: -30px;
+      animation: float 4.5s ease-in-out infinite reverse;
+    }
+
+    .badge-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #eaf2ff;
+    }
+
+    /* =========================================================
+       TRUST BAR
+    ========================================================= */
+
+    .trust-bar {
+      background: white;
+      border-bottom: 1px solid #edf1f6;
+      border-top: 1px solid #edf1f6;
+    }
+
+    .trust-inner {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #667085;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .trust-item b {
+      color: #101828;
+    }
+
+    /* =========================================================
+       LOGIN / START SECTION
+    ========================================================= */
+
+    .start-section {
+      padding: 100px 0;
+      background: #ffffff;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 50px;
+    }
+
+    .section-heading .tag {
+      color: #0866ff;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px,4vw,46px);
+      letter-spacing: -1.5px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: #667085;
+      line-height: 1.7;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 24px;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .role-card {
+      position: relative;
+      padding: 36px;
+      border: 1px solid #e4eaf2;
+      border-radius: 24px;
+      background: white;
+      overflow: hidden;
+
+      transition: .3s;
+    }
+
+    .role-card:hover {
+      transform: translateY(-8px);
+      border-color: #9fc3ff;
+      box-shadow: 0 25px 60px rgba(8,102,255,.10);
+    }
+
+    .role-icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+
+      border-radius: 18px;
+      background: #eaf2ff;
+      font-size: 30px;
+
+      margin-bottom: 22px;
+    }
+
+    .role-card h3 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .role-card p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .role-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      color: #0866ff;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+
+    .services-section {
+      padding: 100px 0;
+      background: #f7faff;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 17px;
+    }
+
+    .service-box {
+      background: white;
+      padding: 25px 20px;
+      border-radius: 18px;
+      border: 1px solid #e9eef5;
+
+      transition: .3s;
+    }
+
+    .service-box:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 45px rgba(16,24,40,.08);
+      border-color: #b8d3ff;
+    }
+
+    .service-box .service-emoji {
+      font-size: 30px;
+      margin-bottom: 17px;
+      display: block;
+    }
+
+    .service-box h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .service-box p {
+      color: #98a2b3;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       HOW IT WORKS
+    ========================================================= */
+
+    .how-section {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .step-number {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 20px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: #0866ff;
+      color: white;
+
+      font-weight: 900;
+      font-size: 18px;
+
+      box-shadow: 0 10px 25px rgba(8,102,255,.25);
+    }
+
+    .step h3 {
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .step p {
+      color: #667085;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       SAFETY
+    ========================================================= */
+
+    .safety-section {
+      padding: 90px 0;
+      background: #0866ff;
+      color: white;
+    }
+
+    .safety-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .safety-copy h2 {
+      font-size: clamp(32px,4vw,48px);
+      letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+
+    .safety-copy p {
+      color: rgba(255,255,255,.78);
+      line-height: 1.8;
+      max-width: 550px;
+    }
+
+    .safety-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .safety-item {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .check {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.16);
+    }
+
+    .safety-item strong {
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       WORKER CTA
+    ========================================================= */
+
+    .worker-section {
+      padding: 100px 0;
+      background: #f7faff;
+    }
+
+    .worker-card {
+      background: white;
+      border: 1px solid #e1e8f0;
+      border-radius: 30px;
+      padding: 55px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+
+      box-shadow: 0 20px 70px rgba(16,24,40,.06);
+    }
+
+    .worker-card h2 {
+      font-size: 32px;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .worker-card p {
+      color: #667085;
+      line-height: 1.7;
+      max-width: 650px;
+    }
+
+    .fee {
+      display: inline-block;
+      margin-top: 14px;
+      color: #0866ff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .site-footer {
+      background: #07111f;
+      color: white;
+      padding: 55px 0 25px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 45px;
+      padding-bottom: 40px;
+    }
+
+    .footer-brand p {
+      color: #98a2b3;
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 330px;
+      margin-top: 15px;
+    }
+
+    .footer-title {
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+    }
+
+    .footer-links a {
+      color: #98a2b3;
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      color: #667085;
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       CHATBOT
+    ========================================================= */
+
+    .chat-button {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 999;
+
+      width: 58px;
+      height: 58px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: #0866ff;
+      color: white;
+
+      font-size: 24px;
+      cursor: pointer;
+
+      box-shadow: 0 12px 30px rgba(8,102,255,.35);
+
+      animation: pulse 2.5s infinite;
+    }
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes float {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes cardFloat {
+      0%,100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(.5deg);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(8,102,255,.45);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(8,102,255,0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(8,102,255,0);
+      }
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media(max-width:900px) {
+
+      .site-nav {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 60px 0 80px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy > p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .steps {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .safety-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .worker-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .header-inner {
+        height: 68px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .hero {
+        padding-top: 68px;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+      }
+
+      .hero-copy > p {
+        font-size: 15px;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .service-card {
+        padding: 18px;
+      }
+
+      .badge-one {
+        right: -5px;
+      }
+
+      .badge-two {
+        left: -5px;
+      }
+
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-inner {
+        justify-content: center;
+        padding: 20px 0;
+      }
+
+      .worker-card {
+        padding: 30px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+
+      <div class="logo-mark">
+        🔧
+      </div>
+
+      FIXIT<span>.</span>
+
+    </a>
+
+    <button class="nav-toggle"
+            aria-label="Open menu"
+            onclick="toggleMenu()">
+      ☰
+    </button>
+
+    <nav class="site-nav">
+
+      <ul>
+
+        <li>
+          <a href="#home">Home</a>
+        </li>
+
+        <li>
+          <a href="#services">Services</a>
+        </li>
+
+        <li>
+          <a href="#how">How it works</a>
+        </li>
+
+        <li>
+          <a href="#workers">For Workers</a>
+        </li>
+
+        <li>
+          <a href="#login" class="header-login">
+            Login
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+  <div class="container hero-inner">
+
+    <div class="hero-copy reveal">
+
+      <div class="eyebrow">
+        <span class="status-dot"></span>
+        Trusted home services near you
+      </div>
+
+      <h1>
+        Your home needs fixing?
+        <span>FIXIT.</span>
+      </h1>
+
+      <p>
+        Find trusted electricians, plumbers, AC technicians,
+        refrigerator mechanics and more — all in one place.
+        Simple booking. Nearby professionals. Reliable service.
+      </p>
+
+      <div class="hero-actions">
+
+        <a href="#login" class="btn btn-primary">
+          🔧 Find a Worker
+        </a>
+
+        <a href="#workers" class="btn btn-secondary">
+          👨‍🔧 Join as Worker
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-visual reveal">
+
+      <div class="floating-badge badge-one">
+        <div class="badge-icon">📍</div>
+        <div>
+          Workers near you
+          <br>
+          <span style="color:#12b76a;">● Available now</span>
+        </div>
+      </div>
+
+
+      <div class="service-card">
+
+        <div class="card-header">
+
+          <strong>Nearby Professionals</strong>
+
+          <span class="online">
+            ● LIVE
+          </span>
+
+        </div>
+
+
+        <div class="service-list">
+
+          <div class="mini-worker">
+
+            <div class="worker-icon">
+              ⚡
+            </div>
+
+            <div class="worker-info">
+
+              <strong>Electrician</strong>
+
+              <small>
+                Electrical repair • Nearby
+              </small>
+
+              <div class="stars">
+                ★★★★★
+              </div>
+
+            </div>
+
+            <span class="book-mini">
+              Available
+            </span>
+
+          </div>
+
+
+          <div class="mini-worker">
+
+            <div class="worker-icon">
+              🚰
+            </div>
+
+            <div class="worker-info">
+
+              <strong>Plumber</strong>
+
+              <small>
+                Plumbing • Nearby
+              </small>
+
+              <div class="stars">
+                ★★★★★
+              </div>
+
+            </div>
+
+            <span class="book-mini">
+              Available
+            </span>
+
+          </div>
+
+
+          <div class="mini-worker">
+
+            <div class="worker-icon">
+              ❄️
+            </div>
+
+            <div class="worker-info">
+
+              <strong>AC Technician</strong>
+
+              <small>
+                AC service • Nearby
+              </small>
+
+              <div class="stars">
+                ★★★★★
+              </div>
+
+            </div>
+
+            <span class="book-mini">
+              Available
+            </span>
+
+          </div>
+
+
+          <div class="mini-worker">
+
+            <div class="worker-icon">
+              🧊
+            </div>
+
+            <div class="worker-info">
+
+              <strong>Refrigerator</strong>
+
+              <small>
+                Appliance repair
+              </small>
+
+              <div class="stars">
+                ★★★★★
+              </div>
+
+            </div>
+
+            <span class="book-mini">
+              Available
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="floating-badge badge-two">
+
+        <div class="badge-icon">
+          🔐
+        </div>
+
+        <div>
+          Secure booking
+          <br>
+          <span style="color:#667085;">
+            One-time verification code
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRUST BAR
+========================================================= -->
+
+<section class="trust-bar">
+
+  <div class="container trust-inner">
+
+    <div class="trust-item">
+      ✓ <b>Verified workers</b>
+    </div>
+
+    <div class="trust-item">
+      📍 <b>Location based</b>
+    </div>
+
+    <div class="trust-item">
+      ⭐ <b>Customer ratings</b>
+    </div>
+
+    <div class="trust-item">
+      🔐 <b>Secure booking</b>
+    </div>
+
+    <div class="trust-item">
+      💬 <b>WhatsApp support</b>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOGIN / ROLE
+========================================================= -->
+
+<section class="start-section" id="login">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <span class="tag">
+        GET STARTED
+      </span>
+
+      <h2>
+        What do you need today?
+      </h2>
+
+      <p>
+        Choose your role to continue with FIXIT.
+        Customers can find professionals, while skilled workers
+        can register and receive service requests.
+      </p>
+
+    </div>
+
+
+    <div class="role-grid">
+
+      <!-- CUSTOMER -->
+
+      <div class="role-card reveal">
+
+        <div class="role-icon">
+          🏠
+        </div>
+
+        <h3>
+          I Need a Worker
+        </h3>
+
+        <p>
+          Find electricians, plumbers, AC technicians,
+          refrigerator mechanics and other professionals
+          near your location.
+        </p>
+
+        <a href="client.html" class="role-link">
+          Continue as Customer →
+        </a>
+
+      </div>
+
+
+      <!-- WORKER -->
+
+      <div class="role-card reveal">
+
+        <div class="role-icon">
+          👨‍🔧
+        </div>
+
+        <h3>
+          I Am a Worker
+        </h3>
+
+        <p>
+          Join FIXIT, create your professional profile,
+          receive customer requests and grow your local
+          service business.
+        </p>
+
+        <a href="worker.html" class="role-link">
+          Register as Worker →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="services-section" id="services">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <span class="tag">
+        HOME SERVICES
+      </span>
+
+      <h2>
+        One platform for everyday problems
+      </h2>
+
+      <p>
+        From small repairs to urgent home services,
+        FIXIT helps you find the right professional.
+      </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+      <div class="service-box reveal">
+        <span class="service-emoji">⚡</span>
+        <h3>Electrician</h3>
+        <p>Wiring, switches, lights, repairs and more.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🚰</span>
+        <h3>Plumber</h3>
+        <p>Leaks, pipes, taps, water systems and repairs.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">❄️</span>
+        <h3>AC Technician</h3>
+        <p>AC service, installation and maintenance.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🧊</span>
+        <h3>Refrigerator</h3>
+        <p>Home appliance diagnostics and repair.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🧺</span>
+        <h3>Washing Machine</h3>
+        <p>Repair and maintenance for washing machines.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🎨</span>
+        <h3>Painter</h3>
+        <p>Interior, exterior and home painting services.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🪚</span>
+        <h3>Carpenter</h3>
+        <p>Furniture, doors, fittings and woodwork.</p>
+      </div>
+
+      <div class="service-box reveal">
+        <span class="service-emoji">🔧</span>
+        <h3>More Services</h3>
+        <p>More local professionals coming soon.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="how-section" id="how">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <span class="tag">
+        SIMPLE PROCESS
+      </span>
+
+      <h2>
+        Get your problem fixed in 4 steps
+      </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+      <div class="step reveal">
+
+        <div class="step-number">
+          01
+        </div>
+
+        <h3>
+          Choose a Service
+        </h3>
+
+        <p>
+          Select electrician, plumber, AC technician
+          or another available service.
+        </p>
+
+      </div>
+
+
+      <div class="step reveal">
+
+        <div class="step-number">
+          02
+        </div>
+
+        <h3>
+          Share Location
+        </h3>
+
+        <p>
+          Enter your area so FIXIT can show
+          available professionals nearby.
+        </p>
+
+      </div>
+
+
+      <div class="step reveal">
+
+        <div class="step-number">
+          03
+        </div>
+
+        <h3>
+          Book a Worker
+        </h3>
+
+        <p>
+          View professional information, ratings
+          and availability before booking.
+        </p>
+
+      </div>
+
+
+      <div class="step reveal">
+
+        <div class="step-number">
+          04
+        </div>
+
+        <h3>
+          Verify & Fix
+        </h3>
+
+        <p>
+          Give the one-time booking code to the worker
+          when they arrive at your home.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SAFETY
+========================================================= -->
+
+<section class="safety-section">
+
+  <div class="container safety-inner">
+
+    <div class="safety-copy reveal">
+
+      <h2>
+        Built around trust.
+      </h2>
+
+      <p>
+        FIXIT is designed to make local home services
+        easier and safer for both customers and professionals.
+        Worker approval, ratings, location information and
+        booking verification help create a more reliable experience.
+      </p>
+
+    </div>
+
+
+    <div class="safety-list reveal">
+
+      <div class="safety-item">
+
+        <div class="check">✓</div>
+
+        <strong>
+          Admin-approved worker registration
+        </strong>
+
+      </div>
+
+
+      <div class="safety-item">
+
+        <div class="check">✓</div>
+
+        <strong>
+          Customer ratings and feedback
+        </strong>
+
+      </div>
+
+
+      <div class="safety-item">
+
+        <div class="check">✓</div>
+
+        <strong>
+          One-time booking verification code
+        </strong>
+
+      </div>
+
+
+      <div class="safety-item">
+
+        <div class="check">✓</div>
+
+        <strong>
+          Location-based professional discovery
+        </strong>
+
+      </div>
+
+
+      <div class="safety-item">
+
+        <div class="check">✓</div>
+
+        <strong>
+          WhatsApp communication support
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     WORKER CTA
+========================================================= -->
+
+<section class="worker-section" id="workers">
+
+  <div class="container">
+
+    <div class="worker-card reveal">
+
+      <div>
+
+        <h2>
+          Are you a skilled professional?
+        </h2>
+
+        <p>
+          Join FIXIT and get discovered by customers
+          looking for local service professionals.
+          Register your skills, service area and experience
+          and wait for admin approval.
+        </p>
+
+        <span class="fee">
+          Worker registration: ₹70
+        </span>
+
+      </div>
+
+      <a href="worker.html" class="btn btn-primary">
+        Register as Worker →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <div class="logo" style="color:white;">
+          <div class="logo-mark">🔧</div>
+          FIXIT<span style="color:#8bb7ff;">.</span>
+        </div>
+
+        <p>
+          A local home-service platform connecting customers
+          with skilled professionals for everyday repair and
+          maintenance needs.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4 class="footer-title">
+          FIXIT
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="#home">Home</a>
+          </li>
+
+          <li>
+            <a href="#services">Services</a>
+          </li>
+
+          <li>
+            <a href="#how">How it works</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4 class="footer-title">
+          Join
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="client.html">Find a Worker</a>
+          </li>
+
+          <li>
+            <a href="worker.html">Become a Worker</a>
+          </li>
+
+          <li>
+            <a href="admin.html">Admin</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4 class="footer-title">
+          Support
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="about.html">About FIXIT</a>
+          </li>
+
+          <li>
+            <a href="contact.html">Contact</a>
+          </li>
+
+          <li>
+            <a href="#">
+              WhatsApp
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © <span id="year"></span> FIXIT. All rights reserved.
+      </span>
+
+      <span>
+        Built for local home services.
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     CHATBOT BUTTON
+========================================================= -->
+
+<button class="chat-button"
+        onclick="openChat()"
+        aria-label="Open FIXIT assistant">
+  💬
+</button>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+  /* YEAR */
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+  /* MOBILE MENU */
+
+  function toggleMenu() {
+
+    const nav = document.querySelector(".site-nav");
+
+    if (nav.style.display === "block") {
+
+      nav.style.display = "none";
+
+    } else {
+
+      nav.style.display = "block";
+
+      nav.style.position = "absolute";
+      nav.style.top = "68px";
+      nav.style.left = "0";
+      nav.style.right = "0";
+      nav.style.background = "white";
+      nav.style.padding = "20px";
+
+      nav.querySelector("ul").style.flexDirection = "column";
+      nav.querySelector("ul").style.alignItems = "flex-start";
+
+    }
+
+  }
+
+
+  /* SCROLL REVEAL */
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+        }
+
+      });
+
+    },
+    {
+      threshold: 0.12
+    }
+  );
+
+
+  document.querySelectorAll(".reveal").forEach((element) => {
+
+    observer.observe(element);
+
+  });
+
+
+  /* CHATBOT */
+
+  function openChat() {
+
+    alert(
+      "FIXIT Assistant\n\n" +
+      "Hi! 👋 How can we help you today?\n\n" +
+      "• Find a worker\n" +
+      "• Register as worker\n" +
+      "• Check available services\n" +
+      "• Get support"
+    );
+
+    /*
+      Replace this alert later with your
+      Jotform AI / FIXIT chatbot integration.
+    */
+
+  }
+
+
+  /* SMOOTH SCROLL */
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+
+    link.addEventListener("click", function(e) {
+
+      const target = document.querySelector(
+        this.getAttribute("href")
+      );
+
+      if (target) {
+
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
+```
